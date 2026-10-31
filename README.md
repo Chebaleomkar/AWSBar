@@ -15,6 +15,7 @@ To build it yourself: `brew install xcodegen`, then `xcodegen generate` and open
 - If that call fails, it shows a Login button for SSO profiles (`aws sso login --profile <name>`) and console-login profiles (`aws login --profile <name>`). Profiles with static keys get only Retry.
 - Shows what AWS has charged the account this month, and in total since the first month with a charge (up to 12 months back). See [Costs and active services](#costs-and-active-services).
 - Lists every service the account used this month or last month, with what each one cost.
+- Click the spend line in the header to see the last 14 days: a daily chart, the change from the 7 days before, and which services moved most. It is one extra Cost Explorer request ($0.01) when you open it, then reused for 6 hours.
 - Lists EC2 instances, RDS instances, ECS services, Lambda functions, and S3 buckets in collapsible sections. EC2, RDS, and ECS rows have a status dot.
 - Starts, stops, and restarts EC2 instances, RDS instances, and ECS services. The buttons appear when you point at a row, and the same actions are in its right-click menu. Stop and restart ask for confirmation first. See [Confirmation](#confirmation).
 - Opens a shell window for a running EC2 instance. Double-click its row, or right-click it and choose Open Shell. See [EC2 shell](#ec2-shell).

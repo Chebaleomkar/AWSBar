@@ -43,6 +43,13 @@ final class AppState {
     private var costsTask: Task<Void, Never>?
     var costsLoading: Bool { costsTask != nil }
 
+    /// The 14-day spend panel that replaces the tab content when the header's spend line is clicked.
+    var costHistoryOpen = false
+    private(set) var costHistory: CostHistory?
+    private(set) var costHistoryError: String?
+    private var costHistoryTask: Task<Void, Never>?
+    var costHistoryLoading: Bool { costHistoryTask != nil }
+
     var runnerCommand = "sts get-caller-identity"
     private(set) var runnerOutput: RunnerOutput?
     private(set) var runnerError: String?
@@ -251,6 +258,34 @@ final class AppState {
         costsTask = nil
         costs = nil
         costsError = nil
+        costHistoryTask?.cancel()
+        costHistoryTask = nil
+        costHistory = nil
+        costHistoryError = nil
+    }
+
+    func toggleCostHistory() {
+        costHistoryOpen.toggle()
+        if costHistoryOpen { loadCostHistory() }
+    }
+
+    /// Same $0.01-per-request rule as `refreshCosts`, so the history is fetched when opened and then reused for 6 hours.
+    func loadCostHistory(force: Bool = false) {
+        guard let aws, auth == .signedIn, costHistoryTask == nil else { return }
+        if !force, let costHistory, Date().timeIntervalSince(costHistory.fetched) < 6 * 3600 { return }
+        let profile = selectedProfileName
+        costHistoryTask = Task {
+            do {
+                let history = try await aws.costHistory()
+                guard !Task.isCancelled, profile == selectedProfileName else { return }
+                costHistory = history
+                costHistoryError = nil
+            } catch {
+                guard !Task.isCancelled, profile == selectedProfileName else { return }
+                costHistoryError = error.localizedDescription
+            }
+            costHistoryTask = nil
+        }
     }
 
     func refresh(_ kind: ServiceKind) async {

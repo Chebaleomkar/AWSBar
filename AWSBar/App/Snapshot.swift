@@ -24,6 +24,14 @@ enum Snapshot {
                              to: dirURL, name: tab.rawValue)
             }
         }
+        // The spend history panel, opened the way a click on the header would.
+        if UserDefaults.standard.string(forKey: "snapshotBucket") == nil, state.auth == .signedIn {
+            state.toggleCostHistory()
+            for _ in 0..<60 where state.costHistory == nil && state.costHistoryError == nil {
+                try? await Task.sleep(for: .milliseconds(250))
+            }
+            await render(PopoverView(tab: .resources).environment(state), width: 400, height: 560, to: dirURL, name: "Spend")
+        }
         NSApplication.shared.terminate(nil)
     }
 
