@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>AWSBar: AWS status and cost in your Mac menu bar</title>
-<meta name="description" content="Free, open-source macOS menu bar app that shows which AWS resources are running or stopped and what they cost. Uses your aws CLI. No analytics.">
+<meta name="description" content="Free, open-source macOS menu bar app that shows which AWS resources are running or stopped and what they cost, with 14-day spend history. No analytics.">
 <meta name="robots" content="index, follow, max-image-preview:large">
 <meta name="author" content="AWSBar">
 <link rel="canonical" href="https://awsbar.vercel.app/">
@@ -266,13 +266,21 @@ footer .meta a{text-decoration:none}footer .meta a:hover{color:var(--ink)}
 
 <section class="row step">
   <div class="rise">
+    <h2>Spend up? See why.</h2>
+    <p>Click the spend line to open the last 14 days: a bar for every day, the change from the week before, and the services that moved the most.</p>
+  </div>
+  <img class="shot rise" style="--d:.1s" src="assets/history.png" alt="Spend, last 14 days: a daily bar chart, up $6.00 from the 7 days before, and the services that changed most" width="620" height="860" loading="lazy">
+</section>
+
+<section class="row flip">
+  <div class="rise">
     <h2>Stopping a server? Type its name.</h2>
     <p>Starting is one click. Stopping or restarting an EC2 or RDS instance only works once you type its exact name. One stray click cannot take production down.</p>
   </div>
   <img class="shot rise" style="--d:.1s" src="assets/stop.png" alt="Stop confirmation asking to type web-prod before the red Stop button works" width="620" height="860" loading="lazy">
 </section>
 
-<section class="row flip">
+<section class="row step">
   <div class="rise">
     <h2>Fourteen one-click commands.</h2>
     <p>Not sure what to run? The Run tab has buttons for the questions you actually ask. All of them only read. Type any aws command too, and AWSBar adds your profile and region.</p>
