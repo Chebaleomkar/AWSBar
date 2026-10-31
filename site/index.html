@@ -99,7 +99,7 @@
   --pad:clamp(20px,4vw,56px); --gap:clamp(96px,14vw,200px);
 }
 *{box-sizing:border-box;margin:0;padding:0}
-html{scroll-behavior:smooth;background:var(--ground)}
+html{scroll-behavior:smooth;scroll-padding-top:92px;background:var(--ground)}
 body{font-family:Inter,-apple-system,BlinkMacSystemFont,"Helvetica Neue",Arial,sans-serif;background:var(--ground);color:var(--ink);font-size:18px;line-height:1.55;-webkit-font-smoothing:antialiased}
 a{color:inherit}
 img,video{display:block;max-width:100%}
@@ -107,13 +107,13 @@ img,video{display:block;max-width:100%}
 ::selection{background:var(--green);color:var(--ground)}
 
 h1,h2{font-weight:800;letter-spacing:-.04em;line-height:1.02}
-h1{font-size:clamp(34px,5.7vw,88px)}
+h1{font-size:clamp(34px,min(5.7vw,10vh),88px)}
 h2{font-size:clamp(34px,4.1vw,64px)}
-p.lead{font-size:24px;color:var(--soft);max-width:34ch;margin-top:28px}
+p.lead{font-size:24px;color:var(--soft);max-width:44ch;margin-top:24px}
 .wrap{padding-left:var(--pad);padding-right:var(--pad)}
 
 /* nav */
-nav{display:flex;align-items:center;justify-content:space-between;padding:22px var(--pad);position:relative;z-index:5}
+nav{display:flex;align-items:center;justify-content:space-between;padding:22px var(--pad);position:sticky;top:0;z-index:50;background:var(--ground)}
 .brand{display:flex;align-items:center;gap:12px;text-decoration:none;font-weight:800;font-size:24px;letter-spacing:-.03em}
 .brand img{width:34px;height:34px}
 nav ul{display:flex;gap:clamp(18px,3vw,40px);list-style:none;align-items:center}
@@ -130,14 +130,14 @@ nav a.l:hover{color:var(--ink)}
 .btn.dark:hover{background:#000}
 
 /* hero */
-.hero{display:grid;grid-template-columns:1.35fr .8fr;gap:var(--pad);align-items:center;padding:clamp(24px,5vw,72px) var(--pad) var(--gap);min-height:calc(100vh - 90px)}
-.hero .ctas{display:flex;gap:14px;flex-wrap:wrap;margin-top:40px}
-.hero .note{margin-top:22px;color:var(--soft);font-size:16px}
+.hero{display:grid;grid-template-columns:1.35fr .8fr;gap:var(--pad);align-items:center;padding:clamp(16px,3vw,48px) var(--pad) clamp(32px,4vw,64px);min-height:calc(100vh - 90px)}
+.hero .ctas{display:flex;gap:14px;flex-wrap:wrap;margin-top:32px}
+.hero .note{margin-top:18px;color:var(--soft);font-size:16px}
 .shot{border-radius:20px;overflow:hidden;background:#0b0c10}
-.hero .shot{justify-self:end;width:min(100%,560px)}
+.hero .shot{justify-self:end;width:auto;max-width:100%;height:min(calc(100vh - 150px),860px)}
 
 /* video */
-.film{padding:0 var(--pad) var(--gap)}
+.film{padding:clamp(48px,8vw,136px) var(--pad) var(--gap)}
 .film h2{max-width:none}
 .film .frame{border-radius:20px;overflow:hidden;background:#000;aspect-ratio:16/9}
 .film video{width:100%;height:100%;object-fit:cover}
@@ -205,7 +205,7 @@ footer .meta a{text-decoration:none}footer .meta a:hover{color:var(--ink)}
   nav ul li:not(:last-child){display:none}
   .hero,.row,.get{grid-template-columns:1fr}
   .hero{min-height:0}
-  .hero .shot{justify-self:center}
+  .hero .shot{justify-self:center;height:auto;width:min(100%,560px)}
   .row.flip .shot{order:0}
   .cols,.faq dl{grid-template-columns:1fr}
 }
@@ -230,7 +230,7 @@ footer .meta a{text-decoration:none}footer .meta a:hover{color:var(--ink)}
     <p class="lead">AWSBar is a free macOS menu bar app. See what is running in AWS, what is stopped and what it costs.</p>
     <div class="ctas">
       <a class="btn" href="assets/AWSBar-0.1.0.dmg" download>Download for macOS</a>
-      <a class="btn ghost" href="#film">Watch the film</a>
+      <a class="btn ghost" data-repo="" href="#get" hidden>View on GitHub</a>
     </div>
     <p class="note">Free and open source. Version 0.1.0 for macOS 14 or later.</p>
   </div>
