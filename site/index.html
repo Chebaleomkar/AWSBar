@@ -1,0 +1,389 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>AWSBar: AWS status and cost in your Mac menu bar</title>
+<meta name="description" content="Free, open-source macOS menu bar app that shows which AWS resources are running or stopped and what they cost. Uses your aws CLI. No analytics.">
+<meta name="robots" content="index, follow, max-image-preview:large">
+<meta name="author" content="AWSBar">
+<link rel="canonical" href="https://awsbar.vercel.app/">
+
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="AWSBar">
+<meta property="og:locale" content="en_US">
+<meta property="og:url" content="https://awsbar.vercel.app/">
+<meta property="og:title" content="AWSBar: your AWS account in the menu bar">
+<meta property="og:description" content="See what is running, what is stopped and what it costs, without opening the console. Free and open source for macOS.">
+<meta property="og:image" content="https://awsbar.vercel.app/assets/og-image.png">
+<meta property="og:image:secure_url" content="https://awsbar.vercel.app/assets/og-image.png">
+<meta property="og:image:type" content="image/png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="AWSBar: the green cloud logo, the headline Your AWS account in the menu bar, and the app showing running and stopped AWS resources">
+
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="AWSBar: your AWS account in the menu bar">
+<meta name="twitter:description" content="See what is running, what is stopped and what it costs. Free and open source for macOS.">
+<meta name="twitter:image" content="https://awsbar.vercel.app/assets/og-image.png">
+<meta name="twitter:image:alt" content="AWSBar: the green cloud logo and the app showing running and stopped AWS resources">
+
+<meta name="theme-color" content="#0f1115">
+<meta name="color-scheme" content="dark">
+<link rel="icon" href="assets/cloud.svg" type="image/svg+xml">
+<link rel="icon" href="assets/favicon-32.png" type="image/png" sizes="32x32">
+<link rel="apple-touch-icon" href="assets/apple-touch-icon.png">
+<link rel="manifest" href="site.webmanifest">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<script type="application/ld+json">{
+ "@context": "https://schema.org",
+ "@type": "SoftwareApplication",
+ "name": "AWSBar",
+ "description": "A free, open-source macOS menu bar app that shows which AWS resources are running or stopped and what they cost. It uses the aws CLI you already have and has no analytics.",
+ "url": "https://awsbar.vercel.app/",
+ "applicationCategory": "DeveloperApplication",
+ "operatingSystem": "macOS 14 or later",
+ "softwareVersion": "0.1.0",
+ "image": "https://awsbar.vercel.app/assets/og-image.png",
+ "downloadUrl": "https://awsbar.vercel.app/assets/AWSBar-0.1.0.dmg",
+ "fileFormat": "application/x-apple-diskimage",
+ "offers": {
+  "@type": "Offer",
+  "price": "0",
+  "priceCurrency": "USD"
+ }
+}</script>
+<script type="application/ld+json">{
+ "@context": "https://schema.org",
+ "@type": "FAQPage",
+ "mainEntity": [
+  {
+   "@type": "Question",
+   "name": "What does it need?",
+   "acceptedAnswer": {
+    "@type": "Answer",
+    "text": "macOS 14 or later and the AWS CLI. Your credentials stay where they already are."
+   }
+  },
+  {
+   "@type": "Question",
+   "name": "Which services does it show?",
+   "acceptedAnswer": {
+    "@type": "Answer",
+    "text": "EC2, ECS, RDS, load balancers, Lambda and S3, plus a spend list for every service with charges."
+   }
+  },
+  {
+   "@type": "Question",
+   "name": "Can it break anything?",
+   "acceptedAnswer": {
+    "@type": "Answer",
+    "text": "Only if you ask. Start, stop and restart exist for EC2, RDS and ECS, and stopping needs confirmation. The Run buttons only read."
+   }
+  },
+  {
+   "@type": "Question",
+   "name": "Why is the cost line a little behind?",
+   "acceptedAnswer": {
+    "@type": "Answer",
+    "text": "Cost Explorer updates a few times a day and bills $0.01 per request, so AWSBar reuses the numbers for six hours."
+   }
+  }
+ ]
+}</script>
+<style>
+:root{
+  --ground:#0f1115; --step:#171a20; --ink:#ffffff; --soft:#b4b9c4; --green:#30d158; --red:#ff453a;
+  --pad:clamp(20px,4vw,56px); --gap:clamp(96px,14vw,200px);
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth;background:var(--ground)}
+body{font-family:Inter,-apple-system,BlinkMacSystemFont,"Helvetica Neue",Arial,sans-serif;background:var(--ground);color:var(--ink);font-size:18px;line-height:1.55;-webkit-font-smoothing:antialiased}
+a{color:inherit}
+img,video{display:block;max-width:100%}
+:focus-visible{outline:3px solid var(--green);outline-offset:3px;border-radius:6px}
+::selection{background:var(--green);color:var(--ground)}
+
+h1,h2{font-weight:800;letter-spacing:-.04em;line-height:1.02}
+h1{font-size:clamp(34px,5.7vw,88px)}
+h2{font-size:clamp(34px,4.1vw,64px)}
+p.lead{font-size:24px;color:var(--soft);max-width:34ch;margin-top:28px}
+.wrap{padding-left:var(--pad);padding-right:var(--pad)}
+
+/* nav */
+nav{display:flex;align-items:center;justify-content:space-between;padding:22px var(--pad);position:relative;z-index:5}
+.brand{display:flex;align-items:center;gap:12px;text-decoration:none;font-weight:800;font-size:24px;letter-spacing:-.03em}
+.brand img{width:34px;height:34px}
+nav ul{display:flex;gap:clamp(18px,3vw,40px);list-style:none;align-items:center}
+nav a.l{text-decoration:none;color:var(--soft);font-size:16px;font-weight:500;transition:color .2s}
+nav a.l:hover{color:var(--ink)}
+
+.btn{display:inline-flex;align-items:center;gap:10px;height:56px;padding:0 28px;border-radius:999px;background:var(--green);color:var(--ground);font-weight:700;font-size:18px;text-decoration:none;transition:transform .18s,background .2s;border:0;cursor:pointer}
+.btn:hover{transform:translateY(-2px);background:#4be071}
+.btn:active{transform:translateY(0) scale(.98)}
+.btn.sm{height:42px;padding:0 20px;font-size:16px}
+.btn.ghost{background:var(--step);color:var(--ink)}
+.btn.ghost:hover{background:#20242c}
+.btn.dark{background:var(--ground);color:var(--ink)}
+.btn.dark:hover{background:#000}
+
+/* hero */
+.hero{display:grid;grid-template-columns:1.35fr .8fr;gap:var(--pad);align-items:center;padding:clamp(24px,5vw,72px) var(--pad) var(--gap);min-height:calc(100vh - 90px)}
+.hero .ctas{display:flex;gap:14px;flex-wrap:wrap;margin-top:40px}
+.hero .note{margin-top:22px;color:var(--soft);font-size:16px}
+.shot{border-radius:20px;overflow:hidden;background:#0b0c10}
+.hero .shot{justify-self:end;width:min(100%,560px)}
+
+/* video */
+.film{padding:0 var(--pad) var(--gap)}
+.film h2{max-width:none}
+.film .frame{border-radius:20px;overflow:hidden;background:#000;aspect-ratio:16/9}
+.film video{width:100%;height:100%;object-fit:cover}
+
+/* feature rows */
+.row{display:grid;grid-template-columns:1fr 1fr;gap:clamp(32px,6vw,120px);align-items:center;padding:var(--gap) var(--pad)}
+.row.step{background:var(--step)}
+.row.flip .shot{order:-1}
+.row .shot{width:min(100%,520px);justify-self:center}
+.row p{color:var(--soft);font-size:24px;max-width:32ch;margin-top:28px}
+.row .g{color:var(--green)}.row .r{color:var(--red)}
+.stat{font-size:clamp(64px,9vw,130px);font-weight:800;letter-spacing:-.05em;line-height:1;margin-top:36px;font-variant-numeric:tabular-nums}
+.stat small{display:block;font-size:18px;font-weight:500;letter-spacing:0;color:var(--soft);margin-top:10px}
+
+/* commands */
+.cmds{padding:var(--gap) var(--pad)}
+.cmds h2{max-width:none}
+.cols{display:grid;grid-template-columns:1fr 1fr;gap:clamp(28px,5vw,96px);margin-top:64px}
+.cols h3{font-size:24px;font-weight:700;letter-spacing:-.02em;margin-bottom:22px}
+.cols ul{list-style:none}
+.cols li{font-size:clamp(24px,2.5vw,36px);font-weight:600;letter-spacing:-.03em;line-height:1.5}
+.cols li span{display:block;font-size:16px;font-weight:400;letter-spacing:0;color:var(--soft);line-height:1.4;margin:2px 0 18px}
+
+/* trust: a whole field of green */
+.trust{background:var(--green);color:var(--ground);padding:var(--gap) var(--pad)}
+.trust h2{max-width:none}
+.trust ul{list-style:none;margin-top:72px}
+.trust li{font-size:clamp(34px,4.4vw,64px);font-weight:800;letter-spacing:-.04em;line-height:1.1;padding:.12em 0}
+.trust p{font-size:24px;max-width:46ch;margin-top:56px;font-weight:500}
+
+/* download */
+.get{padding:var(--gap) var(--pad);display:grid;grid-template-columns:1fr 1fr;gap:clamp(32px,6vw,120px);align-items:start}
+.get .icon{width:clamp(110px,12vw,180px);border-radius:24%;margin-bottom:36px}
+.get ol{list-style:decimal;padding-left:1.3em;margin-top:8px;font-size:24px;color:var(--soft)}
+.get ol li{padding:10px 0}
+.get ol b{color:var(--ink);font-weight:600}
+.get .ctas{display:flex;gap:14px;flex-wrap:wrap;margin-top:36px}
+.get h3{font-size:24px;font-weight:700;letter-spacing:-.02em;margin:48px 0 16px}
+pre{background:var(--step);border-radius:14px;padding:22px 24px;font-size:16px;line-height:1.7;overflow:auto;color:#e6e8ee;font-family:ui-monospace,Menlo,Consolas,monospace}
+
+/* faq */
+.faq{padding:0 var(--pad) var(--gap)}
+.faq h2{max-width:none}
+.faq dl{margin-top:56px;display:grid;grid-template-columns:1fr 1fr;gap:56px clamp(28px,5vw,96px)}
+.faq dt{font-size:24px;font-weight:700;letter-spacing:-.02em;margin-bottom:10px}
+.faq dd{color:var(--soft);font-size:18px;max-width:40ch}
+
+footer{background:var(--step);padding:clamp(56px,8vw,120px) var(--pad) 40px;overflow:hidden}
+footer .big{display:flex;align-items:center;gap:.16em;font-size:clamp(64px,19vw,274px);font-weight:800;letter-spacing:-.06em;line-height:.9}
+footer .big img{width:.8em;height:.8em}
+footer .meta{display:flex;justify-content:space-between;flex-wrap:wrap;gap:16px;margin-top:48px;color:var(--soft);font-size:16px}
+footer .meta a{text-decoration:none}footer .meta a:hover{color:var(--ink)}
+
+/* motion: content stays visible without script */
+.js .rise{opacity:0;transform:translateY(28px);transition:opacity .8s cubic-bezier(.2,.7,.2,1),transform .8s cubic-bezier(.2,.7,.2,1);transition-delay:var(--d,0s)}
+.js .rise.in{opacity:1;transform:none}
+@media (prefers-reduced-motion:reduce){
+  html{scroll-behavior:auto}
+  .js .rise{opacity:1;transform:none;transition:none}
+  .btn,.btn:hover{transition:none;transform:none}
+}
+
+@media (max-width:900px){
+  .row p,.trust p,.get ol,p.lead{font-size:18px}
+  nav ul li:not(:last-child){display:none}
+  .hero,.row,.get{grid-template-columns:1fr}
+  .hero{min-height:0}
+  .hero .shot{justify-self:center}
+  .row.flip .shot{order:0}
+  .cols,.faq dl{grid-template-columns:1fr}
+}
+</style>
+</head>
+<body>
+
+<nav>
+  <a class="brand" href="#top"><img src="assets/cloud.svg" alt="" width="34" height="34">AWSBar</a>
+  <ul>
+    <li><a class="l" href="#features">Features</a></li>
+    <li><a class="l" href="#privacy">Privacy</a></li>
+    <li><a class="l" data-repo="" href="#get" hidden>GitHub</a></li>
+    <li><a class="btn sm" href="#get">Download</a></li>
+  </ul>
+</nav>
+
+<main id="top">
+<section class="hero">
+  <div class="rise">
+    <h1>Your AWS account, in the menu&nbsp;bar.</h1>
+    <p class="lead">AWSBar is a free macOS menu bar app. See what is running in AWS, what is stopped and what it costs.</p>
+    <div class="ctas">
+      <a class="btn" href="assets/AWSBar-0.1.0.dmg" download>Download for macOS</a>
+      <a class="btn ghost" href="#film">Watch the film</a>
+    </div>
+    <p class="note">Free and open source. Version 0.1.0 for macOS 14 or later.</p>
+  </div>
+  <img class="shot rise" style="--d:.12s" fetchpriority="high" decoding="async" src="assets/overview.png" alt="The AWSBar popover: 3 running, 1 stopped, 0 failed, with EC2, ECS and RDS resources listed by name" width="620" height="860">
+</section>
+
+<section class="film" id="film" aria-label="Product film">
+  <div class="frame rise">
+    <!-- Swap the file in assets/ for whichever cut you pick. -->
+    <video id="film-video" aria-label="22-second film showing AWSBar in the macOS menu bar" controls muted loop playsinline preload="metadata" poster="assets/film-poster.jpg">
+      <source src="assets/launch.mp4" type="video/mp4">
+    </video>
+  </div>
+</section>
+
+<div id="features">
+<section class="row step">
+  <div class="rise">
+    <h2><span class="g">Green</span> is live. <span class="r">Red</span> is stopped.</h2>
+    <p>Every EC2 instance, ECS service, RDS database and load balancer gets a dot and a word. A summary line counts them, so one glance tells you what is on.</p>
+  </div>
+  <img class="shot rise" style="--d:.1s" src="assets/overview.png" alt="Resource list with green and red status dots and the words Running and Stopped" width="620" height="860" loading="lazy">
+</section>
+
+<section class="row flip">
+  <div class="rise">
+    <h2>Billed. But nothing&rsquo;s running.</h2>
+    <p>The spend list comes from Cost Explorer. AWSBar checks each billed service against what actually exists, so a charge with nothing behind it stands out.</p>
+    <div class="stat">$21.40<small>Load balancing, this month. None found in the region.</small></div>
+  </div>
+  <img class="shot rise" style="--d:.1s" src="assets/spend.png" alt="Spend by service, with the load balancing line highlighted and the note None in us-east-1" width="620" height="860" loading="lazy">
+</section>
+
+<section class="row step">
+  <div class="rise">
+    <h2>Stopping a server? Type its name.</h2>
+    <p>Starting is one click. Stopping or restarting an EC2 or RDS instance only works once you type its exact name. One stray click cannot take production down.</p>
+  </div>
+  <img class="shot rise" style="--d:.1s" src="assets/stop.png" alt="Stop confirmation asking to type web-prod before the red Stop button works" width="620" height="860" loading="lazy">
+</section>
+
+<section class="row flip">
+  <div class="rise">
+    <h2>Fourteen one-click commands.</h2>
+    <p>Not sure what to run? The Run tab has buttons for the questions you actually ask. All of them only read. Type any aws command too, and AWSBar adds your profile and region.</p>
+  </div>
+  <img class="shot rise" style="--d:.1s" src="assets/run.png" alt="The Run tab with Status and cost and Security command buttons and a result below" width="620" height="860" loading="lazy">
+</section>
+</div>
+
+<section class="cmds">
+  <h2 class="rise">All read-only. All one click.</h2>
+  <div class="cols rise">
+    <div>
+      <h3>Status and cost</h3>
+      <ul>
+        <li>Who am I</li>
+        <li>Running servers</li>
+        <li>Databases</li>
+        <li>Container clusters</li>
+        <li>Load balancers</li>
+        <li>Buckets and Functions</li>
+        <li>Cost this month</li>
+      </ul>
+    </div>
+    <div>
+      <h3>Security</h3>
+      <ul>
+        <li>Open firewall rules</li>
+        <li>Unencrypted disks</li>
+        <li>IAM users and MFA devices</li>
+        <li>Secrets</li>
+        <li>Recent sign-ins</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<section class="trust" id="privacy">
+  <h2 class="rise">Uses the aws CLI you already have.</h2>
+  <ul class="rise">
+    <li>No network calls of its own.</li>
+    <li>No analytics.</li>
+    <li>No saved output.</li>
+  </ul>
+  <p class="rise">AWSBar runs the aws command you installed, with the profiles already in your config. Sign-in uses your own SSO or console login. The history tab keeps the command line, exit code and timing only, and masks values that look like secrets.</p>
+</section>
+
+<section class="get" id="get">
+  <div class="rise">
+    <img class="icon" src="assets/app-icon.png" alt="AWSBar app icon: a green cloud on a dark square" width="180" height="180">
+    <h2>Get AWSBar.</h2>
+    <div class="ctas">
+      <a class="btn" href="assets/AWSBar-0.1.0.dmg" download>Download for macOS</a>
+      <a class="btn ghost" data-repo="" href="#get" id="srcbtn" hidden>View the source</a>
+    </div>
+  </div>
+  <div class="rise" style="--d:.1s">
+    <ol>
+      <li><b>Install the AWS CLI</b> and sign in once (<code>aws configure sso</code> or <code>aws login</code>).</li>
+      <li><b>Download the disk image,</b> open it and drag AWSBar to Applications.</li>
+      <li><b>Right-click, then Open</b> the first time. The app is not notarized yet, so if macOS blocks it, allow it under System Settings, Privacy &amp; Security, Open Anyway.</li>
+      <li><b>Click the green cloud</b> in your menu bar.</li>
+    </ol>
+    <div id="buildself" hidden><h3>Or build it yourself</h3>
+<pre>brew install xcodegen
+xcodegen generate
+open AWSBar.xcodeproj</pre></div>
+  </div>
+</section>
+
+<section class="faq">
+  <h2 class="rise">Questions.</h2>
+  <dl class="rise">
+    <div><dt>What does it need?</dt><dd>macOS 14 or later and the AWS CLI. Your credentials stay where they already are.</dd></div>
+    <div><dt>Which services does it show?</dt><dd>EC2, ECS, RDS, load balancers, Lambda and S3, plus a spend list for every service with charges.</dd></div>
+    <div><dt>Can it break anything?</dt><dd>Only if you ask. Start, stop and restart exist for EC2, RDS and ECS, and stopping needs confirmation. The Run buttons only read.</dd></div>
+    <div><dt>Why is the cost line a little behind?</dt><dd>Cost Explorer updates a few times a day and bills $0.01 per request, so AWSBar reuses the numbers for six hours.</dd></div>
+  </dl>
+</section>
+</main>
+
+<footer>
+  <div class="big"><img src="assets/cloud.svg" alt="">AWSBar</div>
+  <div class="meta">
+    <span>Free and open source. Made for people who pay AWS bills.</span>
+    <a data-repo="" href="#get" hidden>GitHub</a>
+  </div>
+</footer>
+
+<script>
+/* Set this once the repository exists; every GitHub link on the page follows it. */
+var REPO = "https://github.com/Chebaleomkar/AWSBar";
+document.documentElement.classList.add('js');
+document.querySelectorAll('[data-repo]').forEach(function(a){
+  if(REPO){a.href = REPO + a.getAttribute('data-repo'); a.hidden = false; document.getElementById('buildself').hidden = false}
+});
+var io = new IntersectionObserver(function(es){
+  es.forEach(function(e){ if(e.isIntersecting){ e.target.classList.add('in'); io.unobserve(e.target) } })
+},{threshold:.12});
+document.querySelectorAll('.rise').forEach(function(el){ io.observe(el) });
+
+/* The film starts when it scrolls into view, pauses when it leaves, and loops without stopping.
+   Browsers only allow autoplay when muted; the controls let people turn the sound on. */
+var film = document.getElementById('film-video');
+if(film && !window.matchMedia('(prefers-reduced-motion: reduce)').matches){
+  new IntersectionObserver(function(es){
+    es.forEach(function(e){
+      if(e.isIntersecting){ var p = film.play(); if(p && p.catch){ p.catch(function(){}) } }
+      else { film.pause() }
+    })
+  },{threshold:.5}).observe(film);
+}
+</script>
+</body>
+</html>

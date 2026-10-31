@@ -1,0 +1,70 @@
+name: AWSBar
+options:
+  bundleIdPrefix: com.celecolabs
+  deploymentTarget:
+    macOS: "14.0"
+  createIntermediateGroups: true
+packages:
+  SwiftTerm:
+    url: https://github.com/migueldeicaza/SwiftTerm
+    exactVersion: 1.11.0
+settings:
+  base:
+    SWIFT_VERSION: "6.0"
+    MARKETING_VERSION: "0.1.0"
+    CURRENT_PROJECT_VERSION: "1"
+    DEVELOPMENT_TEAM: ""
+targets:
+  AWSBar:
+    type: application
+    platform: macOS
+    sources: [AWSBar]
+    dependencies:
+      - package: SwiftTerm
+        product: SwiftTerm
+    info:
+      path: AWSBar/Info.plist
+      properties:
+        LSUIElement: true
+        LSApplicationCategoryType: public.app-category.developer-tools
+        CFBundleDisplayName: AWSBar
+        CFBundleShortVersionString: "$(MARKETING_VERSION)"
+        CFBundleVersion: "$(CURRENT_PROJECT_VERSION)"
+        NSHumanReadableCopyright: ""
+    entitlements:
+      path: AWSBar/AWSBar.entitlements
+      properties:
+        com.apple.security.app-sandbox: false
+    settings:
+      base:
+        PRODUCT_BUNDLE_IDENTIFIER: com.celecolabs.AWSBar
+        ENABLE_HARDENED_RUNTIME: YES
+        CODE_SIGN_STYLE: Manual
+        CODE_SIGN_IDENTITY: "-"
+        GENERATE_INFOPLIST_FILE: NO
+        COMBINE_HIDPI_IMAGES: YES
+        ASSETCATALOG_COMPILER_APPICON_NAME: AppIcon
+      configs:
+        Release:
+          CODE_SIGN_IDENTITY: "Developer ID Application"
+          OTHER_CODE_SIGN_FLAGS: "--timestamp"
+  AWSBarTests:
+    type: bundle.unit-test
+    platform: macOS
+    sources: [AWSBarTests]
+    dependencies:
+      - target: AWSBar
+    settings:
+      base:
+        GENERATE_INFOPLIST_FILE: YES
+        BUNDLE_LOADER: "$(TEST_HOST)"
+        TEST_HOST: "$(BUILT_PRODUCTS_DIR)/AWSBar.app/Contents/MacOS/AWSBar"
+        CODE_SIGN_IDENTITY: "-"
+schemes:
+  AWSBar:
+    build:
+      targets:
+        AWSBar: all
+        AWSBarTests: [test]
+    test:
+      targets: [AWSBarTests]

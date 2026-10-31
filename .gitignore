@@ -1,0 +1,13 @@
+build/
+xcuserdata/
+DerivedData/
+.DS_Store
+todo.md
+brag-output*/
+dist/
+launch/
+.agents/
+.claude/
+skills-lock.json
+.taste-skill/
+*.log

@@ -1,0 +1,632 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 77;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		03B569A4A0D8A40FD905164E /* TerminalSession.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13E372128D33CF5626A710B9 /* TerminalSession.swift */; };
+		0AA20C809E7C51B3650F5CB5 /* AppState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A9F80DC5420CB5C34E1CE23 /* AppState.swift */; };
+		1992AFEE43335E464AAE7837 /* Resource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61A9E064CD4A337055BEAECA /* Resource.swift */; };
+		2050E7A3DAF30E2359B4C9C8 /* Runner.swift in Sources */ = {isa = PBXBuildFile; fileRef = C07951FFA2981572018D99D1 /* Runner.swift */; };
+		28DFF65FE9DCDFB89DD1E6AC /* CostsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6AB30D64E5CB13B2B723AF34 /* CostsTests.swift */; };
+		28FE09612E20CE04B08AA4DB /* History.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC653CD77588064A400A618C /* History.swift */; };
+		34DB2AFF56DB5E4878768E48 /* ELB.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E26261BE3DF8CC814FD129B /* ELB.swift */; };
+		3AEFBB403AB4A97BF68171E2 /* AWSBarApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = B81FF9BB6BA29EC2C26A42B9 /* AWSBarApp.swift */; };
+		3EB8051CF43E3B2F78F36E04 /* CommandRunnerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 346A95478141C9593755038E /* CommandRunnerView.swift */; };
+		4EBB0B801D3BE0AEC0F73659 /* ConfirmationTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4C9BD658EB8B72FD4EB3509 /* ConfirmationTests.swift */; };
+		5754248A16E89DD9DC0C68F1 /* ShellWindow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5990DD33B8375EDCB385FF7C /* ShellWindow.swift */; };
+		5A18AD51C4E86BA15C956C32 /* HistoryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C04E10073760330B83DBC718 /* HistoryView.swift */; };
+		5EC2FCC1191F4641A3B1A6D9 /* BucketWindow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96E8511F0877068170C14C8A /* BucketWindow.swift */; };
+		5F5C87EEFED4BA7C125A1C40 /* RDS.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31B34303DC0D36F9517BE47F /* RDS.swift */; };
+		66899486676A40CDE3EA2140 /* QuickLookViewTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A62780B0D95E2176B865FBEA /* QuickLookViewTests.swift */; };
+		904A6103AE21E0BDD264EA7B /* ResourcesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD66919D9B295C147AA7D615 /* ResourcesView.swift */; };
+		987C9A90B6F8DB74CD56881F /* CLITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 607C4FAC8DC99A2857F797A0 /* CLITests.swift */; };
+		9DF9B2DBECB4D217988FFE07 /* S3.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0040299FCEAD9FCEDEAA533 /* S3.swift */; };
+		A0A358A09649CE342FC4FC0A /* ECS.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C43C48197B9722CAC31A23C /* ECS.swift */; };
+		A93186A22BDCA07AE064FB94 /* SSM.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7300C7B70E72AF898551CAA5 /* SSM.swift */; };
+		B343754048D780305971AC36 /* SwiftTerm in Frameworks */ = {isa = PBXBuildFile; productRef = 4C5FFA93D1427740D9D8B934 /* SwiftTerm */; };
+		BA927D1056005B15EEAE4BD2 /* NonRestorableWindow.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC5E4AC279A73EA4E2FE6996 /* NonRestorableWindow.swift */; };
+		C8DA99226E67205678AC2E86 /* QuickCommandsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96F06367512B0F34F727DFC0 /* QuickCommandsTests.swift */; };
+		CA2B1188C5B947C25D805D56 /* ParsingTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5FE987C0A349BB1F957ED4AC /* ParsingTests.swift */; };
+		CFBE44AC17A1FC20E058A973 /* S3Tests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C7CBC14F52587E490E172C6 /* S3Tests.swift */; };
+		D3A60150780DD1E9E48C2E31 /* PopoverView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E41CF92AA98DDBD228AE956 /* PopoverView.swift */; };
+		D458811588A9C94E21EC8BDA /* BucketBrowser.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1CFD89E5C98DD4DE8570034 /* BucketBrowser.swift */; };
+		D65524F12BEBF623146C0576 /* TerminalSessionTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED7BF7A4D60FF2DC890CC82A /* TerminalSessionTests.swift */; };
+		DC09EC886BD6BC6468C66C91 /* Costs.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FE15929DD6047B2F9355D04 /* Costs.swift */; };
+		DC4399ED5A41DEA561ADD269 /* QuickCommands.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9C6E4ECC5E43068A5E9952F /* QuickCommands.swift */; };
+		DD1FE4FC2A4C275E932645DF /* SSMSessionTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA35D3B3D6885DAAC1DAD646 /* SSMSessionTests.swift */; };
+		DEEA3D47F6409D8F368886AB /* AWSProfiles.swift in Sources */ = {isa = PBXBuildFile; fileRef = CBCF1DD7424AA0E44AAD8B9C /* AWSProfiles.swift */; };
+		E0FDD981EFFD7A963CC5760F /* Lambda.swift in Sources */ = {isa = PBXBuildFile; fileRef = F66BB2D32167529FCFBA6BD2 /* Lambda.swift */; };
+		E10AE9706E446ABAD7213728 /* EC2.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AB3DB7AA4D7F11EB523DF3A /* EC2.swift */; };
+		E891919C5A84178AB4631CBE /* Snapshot.swift in Sources */ = {isa = PBXBuildFile; fileRef = 824FA8EC33A38B19A107610D /* Snapshot.swift */; };
+		EC66944EA62DA9BEAA88DB57 /* CLI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 953F03305BABE16A37A67B27 /* CLI.swift */; };
+		F1D22496D23B057D9FED2DBC /* STS.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61BEAB542D4238CA94B88C6A /* STS.swift */; };
+		F553937B427FC84CA42B8E2C /* HeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99F4F50C8C12F941511ACE4E /* HeaderView.swift */; };
+		FA775ECAAFD65AED773CE902 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 870B2EA5A9D8F295F654ADAA /* Assets.xcassets */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		95A550EE9029F1701C673E55 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 0BDC5FB97DAFCF41CB09FBCA /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 7B462572EB7153167C318089;
+			remoteInfo = AWSBar;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		0AB3DB7AA4D7F11EB523DF3A /* EC2.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EC2.swift; sourceTree = "<group>"; };
+		13E372128D33CF5626A710B9 /* TerminalSession.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TerminalSession.swift; sourceTree = "<group>"; };
+		1A9F80DC5420CB5C34E1CE23 /* AppState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppState.swift; sourceTree = "<group>"; };
+		2509DD40580ADD618FD9A384 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
+		31B34303DC0D36F9517BE47F /* RDS.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RDS.swift; sourceTree = "<group>"; };
+		346A95478141C9593755038E /* CommandRunnerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommandRunnerView.swift; sourceTree = "<group>"; };
+		3FE15929DD6047B2F9355D04 /* Costs.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Costs.swift; sourceTree = "<group>"; };
+		4E41CF92AA98DDBD228AE956 /* PopoverView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PopoverView.swift; sourceTree = "<group>"; };
+		572A180C477B581939B34D0C /* AWSBar.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = AWSBar.entitlements; sourceTree = "<group>"; };
+		5990DD33B8375EDCB385FF7C /* ShellWindow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShellWindow.swift; sourceTree = "<group>"; };
+		5FE987C0A349BB1F957ED4AC /* ParsingTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ParsingTests.swift; sourceTree = "<group>"; };
+		607C4FAC8DC99A2857F797A0 /* CLITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CLITests.swift; sourceTree = "<group>"; };
+		61A9E064CD4A337055BEAECA /* Resource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Resource.swift; sourceTree = "<group>"; };
+		61BEAB542D4238CA94B88C6A /* STS.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = STS.swift; sourceTree = "<group>"; };
+		6AB30D64E5CB13B2B723AF34 /* CostsTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CostsTests.swift; sourceTree = "<group>"; };
+		7300C7B70E72AF898551CAA5 /* SSM.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SSM.swift; sourceTree = "<group>"; };
+		7E26261BE3DF8CC814FD129B /* ELB.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ELB.swift; sourceTree = "<group>"; };
+		824FA8EC33A38B19A107610D /* Snapshot.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Snapshot.swift; sourceTree = "<group>"; };
+		870B2EA5A9D8F295F654ADAA /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		8C43C48197B9722CAC31A23C /* ECS.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ECS.swift; sourceTree = "<group>"; };
+		8C7CBC14F52587E490E172C6 /* S3Tests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = S3Tests.swift; sourceTree = "<group>"; };
+		953F03305BABE16A37A67B27 /* CLI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CLI.swift; sourceTree = "<group>"; };
+		96E8511F0877068170C14C8A /* BucketWindow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BucketWindow.swift; sourceTree = "<group>"; };
+		96F06367512B0F34F727DFC0 /* QuickCommandsTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuickCommandsTests.swift; sourceTree = "<group>"; };
+		99F4F50C8C12F941511ACE4E /* HeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HeaderView.swift; sourceTree = "<group>"; };
+		9B5D3B99A8334BA2C82D8546 /* AWSBarTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = AWSBarTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		A1CFD89E5C98DD4DE8570034 /* BucketBrowser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BucketBrowser.swift; sourceTree = "<group>"; };
+		A62780B0D95E2176B865FBEA /* QuickLookViewTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuickLookViewTests.swift; sourceTree = "<group>"; };
+		A9C6E4ECC5E43068A5E9952F /* QuickCommands.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuickCommands.swift; sourceTree = "<group>"; };
+		AD66919D9B295C147AA7D615 /* ResourcesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResourcesView.swift; sourceTree = "<group>"; };
+		B4C9BD658EB8B72FD4EB3509 /* ConfirmationTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConfirmationTests.swift; sourceTree = "<group>"; };
+		B4DDE1E3C0787EFE521E73ED /* AWSBar.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = AWSBar.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		B81FF9BB6BA29EC2C26A42B9 /* AWSBarApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AWSBarApp.swift; sourceTree = "<group>"; };
+		C04E10073760330B83DBC718 /* HistoryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HistoryView.swift; sourceTree = "<group>"; };
+		C07951FFA2981572018D99D1 /* Runner.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Runner.swift; sourceTree = "<group>"; };
+		CBCF1DD7424AA0E44AAD8B9C /* AWSProfiles.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AWSProfiles.swift; sourceTree = "<group>"; };
+		D0040299FCEAD9FCEDEAA533 /* S3.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = S3.swift; sourceTree = "<group>"; };
+		DA35D3B3D6885DAAC1DAD646 /* SSMSessionTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SSMSessionTests.swift; sourceTree = "<group>"; };
+		ED7BF7A4D60FF2DC890CC82A /* TerminalSessionTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TerminalSessionTests.swift; sourceTree = "<group>"; };
+		F66BB2D32167529FCFBA6BD2 /* Lambda.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Lambda.swift; sourceTree = "<group>"; };
+		FC5E4AC279A73EA4E2FE6996 /* NonRestorableWindow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NonRestorableWindow.swift; sourceTree = "<group>"; };
+		FC653CD77588064A400A618C /* History.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = History.swift; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		F770FCD4321AC980FAE0E39B /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				B343754048D780305971AC36 /* SwiftTerm in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		88A0B7AB7BFFB9ABEC954728 /* Core */ = {
+			isa = PBXGroup;
+			children = (
+				CBCF1DD7424AA0E44AAD8B9C /* AWSProfiles.swift */,
+				953F03305BABE16A37A67B27 /* CLI.swift */,
+				FC653CD77588064A400A618C /* History.swift */,
+				A9C6E4ECC5E43068A5E9952F /* QuickCommands.swift */,
+				61A9E064CD4A337055BEAECA /* Resource.swift */,
+				C07951FFA2981572018D99D1 /* Runner.swift */,
+			);
+			path = Core;
+			sourceTree = "<group>";
+		};
+		9660EA193825F1F3A55C5570 = {
+			isa = PBXGroup;
+			children = (
+				D8076746989CFE74F73CC0D9 /* AWSBar */,
+				A50DDBE71FEEF9B756A8F6EE /* AWSBarTests */,
+				D4E871311C3BE85522EE210A /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		A50DDBE71FEEF9B756A8F6EE /* AWSBarTests */ = {
+			isa = PBXGroup;
+			children = (
+				607C4FAC8DC99A2857F797A0 /* CLITests.swift */,
+				B4C9BD658EB8B72FD4EB3509 /* ConfirmationTests.swift */,
+				6AB30D64E5CB13B2B723AF34 /* CostsTests.swift */,
+				5FE987C0A349BB1F957ED4AC /* ParsingTests.swift */,
+				96F06367512B0F34F727DFC0 /* QuickCommandsTests.swift */,
+				A62780B0D95E2176B865FBEA /* QuickLookViewTests.swift */,
+				8C7CBC14F52587E490E172C6 /* S3Tests.swift */,
+				DA35D3B3D6885DAAC1DAD646 /* SSMSessionTests.swift */,
+				ED7BF7A4D60FF2DC890CC82A /* TerminalSessionTests.swift */,
+			);
+			path = AWSBarTests;
+			sourceTree = "<group>";
+		};
+		A9AD5DB31CA1470BC97AE768 /* App */ = {
+			isa = PBXGroup;
+			children = (
+				1A9F80DC5420CB5C34E1CE23 /* AppState.swift */,
+				B81FF9BB6BA29EC2C26A42B9 /* AWSBarApp.swift */,
+				A1CFD89E5C98DD4DE8570034 /* BucketBrowser.swift */,
+				824FA8EC33A38B19A107610D /* Snapshot.swift */,
+				13E372128D33CF5626A710B9 /* TerminalSession.swift */,
+			);
+			path = App;
+			sourceTree = "<group>";
+		};
+		D0EFA0586AF6FF43AD1CC7C7 /* Services */ = {
+			isa = PBXGroup;
+			children = (
+				3FE15929DD6047B2F9355D04 /* Costs.swift */,
+				0AB3DB7AA4D7F11EB523DF3A /* EC2.swift */,
+				8C43C48197B9722CAC31A23C /* ECS.swift */,
+				7E26261BE3DF8CC814FD129B /* ELB.swift */,
+				F66BB2D32167529FCFBA6BD2 /* Lambda.swift */,
+				31B34303DC0D36F9517BE47F /* RDS.swift */,
+				D0040299FCEAD9FCEDEAA533 /* S3.swift */,
+				7300C7B70E72AF898551CAA5 /* SSM.swift */,
+				61BEAB542D4238CA94B88C6A /* STS.swift */,
+			);
+			path = Services;
+			sourceTree = "<group>";
+		};
+		D4E871311C3BE85522EE210A /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				B4DDE1E3C0787EFE521E73ED /* AWSBar.app */,
+				9B5D3B99A8334BA2C82D8546 /* AWSBarTests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		D8076746989CFE74F73CC0D9 /* AWSBar */ = {
+			isa = PBXGroup;
+			children = (
+				870B2EA5A9D8F295F654ADAA /* Assets.xcassets */,
+				572A180C477B581939B34D0C /* AWSBar.entitlements */,
+				2509DD40580ADD618FD9A384 /* Info.plist */,
+				A9AD5DB31CA1470BC97AE768 /* App */,
+				88A0B7AB7BFFB9ABEC954728 /* Core */,
+				D0EFA0586AF6FF43AD1CC7C7 /* Services */,
+				E24728CC7407059A0F3D66A4 /* Views */,
+			);
+			path = AWSBar;
+			sourceTree = "<group>";
+		};
+		E24728CC7407059A0F3D66A4 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				96E8511F0877068170C14C8A /* BucketWindow.swift */,
+				346A95478141C9593755038E /* CommandRunnerView.swift */,
+				99F4F50C8C12F941511ACE4E /* HeaderView.swift */,
+				C04E10073760330B83DBC718 /* HistoryView.swift */,
+				FC5E4AC279A73EA4E2FE6996 /* NonRestorableWindow.swift */,
+				4E41CF92AA98DDBD228AE956 /* PopoverView.swift */,
+				AD66919D9B295C147AA7D615 /* ResourcesView.swift */,
+				5990DD33B8375EDCB385FF7C /* ShellWindow.swift */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		2A9C992DDEBFABD96FF18215 /* AWSBarTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = D56160B797DE89CA3FD2EAC6 /* Build configuration list for PBXNativeTarget "AWSBarTests" */;
+			buildPhases = (
+				25BD2E2FD35481B65BC698FB /* Sources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				3EA9815732F73BE4A708C3C8 /* PBXTargetDependency */,
+			);
+			name = AWSBarTests;
+			packageProductDependencies = (
+			);
+			productName = AWSBarTests;
+			productReference = 9B5D3B99A8334BA2C82D8546 /* AWSBarTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+		7B462572EB7153167C318089 /* AWSBar */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 93B1FE1F437E1A290151137D /* Build configuration list for PBXNativeTarget "AWSBar" */;
+			buildPhases = (
+				20C52F61138C5B9070E58316 /* Sources */,
+				E157DC9DA999E8F9D4AB1897 /* Resources */,
+				F770FCD4321AC980FAE0E39B /* Frameworks */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = AWSBar;
+			packageProductDependencies = (
+				4C5FFA93D1427740D9D8B934 /* SwiftTerm */,
+			);
+			productName = AWSBar;
+			productReference = B4DDE1E3C0787EFE521E73ED /* AWSBar.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		0BDC5FB97DAFCF41CB09FBCA /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				BuildIndependentTargetsInParallel = YES;
+				LastUpgradeCheck = 1430;
+				TargetAttributes = {
+					2A9C992DDEBFABD96FF18215 = {
+						DevelopmentTeam = "";
+					};
+					7B462572EB7153167C318089 = {
+						DevelopmentTeam = "";
+						ProvisioningStyle = Manual;
+					};
+				};
+			};
+			buildConfigurationList = 8D9F8F9A736C2F673C5A0483 /* Build configuration list for PBXProject "AWSBar" */;
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				Base,
+				en,
+			);
+			mainGroup = 9660EA193825F1F3A55C5570;
+			minimizedProjectReferenceProxies = 1;
+			packageReferences = (
+				A012B042E9B1E84300BF76BA /* XCRemoteSwiftPackageReference "SwiftTerm" */,
+			);
+			preferredProjectObjectVersion = 77;
+			productRefGroup = D4E871311C3BE85522EE210A /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				7B462572EB7153167C318089 /* AWSBar */,
+				2A9C992DDEBFABD96FF18215 /* AWSBarTests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		E157DC9DA999E8F9D4AB1897 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				FA775ECAAFD65AED773CE902 /* Assets.xcassets in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		20C52F61138C5B9070E58316 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				3AEFBB403AB4A97BF68171E2 /* AWSBarApp.swift in Sources */,
+				DEEA3D47F6409D8F368886AB /* AWSProfiles.swift in Sources */,
+				0AA20C809E7C51B3650F5CB5 /* AppState.swift in Sources */,
+				D458811588A9C94E21EC8BDA /* BucketBrowser.swift in Sources */,
+				5EC2FCC1191F4641A3B1A6D9 /* BucketWindow.swift in Sources */,
+				EC66944EA62DA9BEAA88DB57 /* CLI.swift in Sources */,
+				3EB8051CF43E3B2F78F36E04 /* CommandRunnerView.swift in Sources */,
+				DC09EC886BD6BC6468C66C91 /* Costs.swift in Sources */,
+				E10AE9706E446ABAD7213728 /* EC2.swift in Sources */,
+				A0A358A09649CE342FC4FC0A /* ECS.swift in Sources */,
+				34DB2AFF56DB5E4878768E48 /* ELB.swift in Sources */,
+				F553937B427FC84CA42B8E2C /* HeaderView.swift in Sources */,
+				28FE09612E20CE04B08AA4DB /* History.swift in Sources */,
+				5A18AD51C4E86BA15C956C32 /* HistoryView.swift in Sources */,
+				E0FDD981EFFD7A963CC5760F /* Lambda.swift in Sources */,
+				BA927D1056005B15EEAE4BD2 /* NonRestorableWindow.swift in Sources */,
+				D3A60150780DD1E9E48C2E31 /* PopoverView.swift in Sources */,
+				DC4399ED5A41DEA561ADD269 /* QuickCommands.swift in Sources */,
+				5F5C87EEFED4BA7C125A1C40 /* RDS.swift in Sources */,
+				1992AFEE43335E464AAE7837 /* Resource.swift in Sources */,
+				904A6103AE21E0BDD264EA7B /* ResourcesView.swift in Sources */,
+				2050E7A3DAF30E2359B4C9C8 /* Runner.swift in Sources */,
+				9DF9B2DBECB4D217988FFE07 /* S3.swift in Sources */,
+				A93186A22BDCA07AE064FB94 /* SSM.swift in Sources */,
+				F1D22496D23B057D9FED2DBC /* STS.swift in Sources */,
+				5754248A16E89DD9DC0C68F1 /* ShellWindow.swift in Sources */,
+				E891919C5A84178AB4631CBE /* Snapshot.swift in Sources */,
+				03B569A4A0D8A40FD905164E /* TerminalSession.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		25BD2E2FD35481B65BC698FB /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				987C9A90B6F8DB74CD56881F /* CLITests.swift in Sources */,
+				4EBB0B801D3BE0AEC0F73659 /* ConfirmationTests.swift in Sources */,
+				28DFF65FE9DCDFB89DD1E6AC /* CostsTests.swift in Sources */,
+				CA2B1188C5B947C25D805D56 /* ParsingTests.swift in Sources */,
+				C8DA99226E67205678AC2E86 /* QuickCommandsTests.swift in Sources */,
+				66899486676A40CDE3EA2140 /* QuickLookViewTests.swift in Sources */,
+				CFBE44AC17A1FC20E058A973 /* S3Tests.swift in Sources */,
+				DD1FE4FC2A4C275E932645DF /* SSMSessionTests.swift in Sources */,
+				D65524F12BEBF623146C0576 /* TerminalSessionTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		3EA9815732F73BE4A708C3C8 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 7B462572EB7153167C318089 /* AWSBar */;
+			targetProxy = 95A550EE9029F1701C673E55 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin XCBuildConfiguration section */
+		271DB92255F610852F73DD85 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = AWSBar/AWSBar.entitlements;
+				CODE_SIGN_IDENTITY = "-";
+				CODE_SIGN_STYLE = Manual;
+				COMBINE_HIDPI_IMAGES = YES;
+				ENABLE_HARDENED_RUNTIME = YES;
+				GENERATE_INFOPLIST_FILE = NO;
+				INFOPLIST_FILE = AWSBar/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.celecolabs.AWSBar;
+				SDKROOT = macosx;
+			};
+			name = Debug;
+		};
+		4B5C1B456337FFFCF3912111 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				CURRENT_PROJECT_VERSION = 1;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				DEVELOPMENT_TEAM = "";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 14.0;
+				MARKETING_VERSION = 0.1.0;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = macosx;
+				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_OPTIMIZATION_LEVEL = "-O";
+				SWIFT_VERSION = 6.0;
+			};
+			name = Release;
+		};
+		7713B7B1A6CE6436680FAE5D /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				CURRENT_PROJECT_VERSION = 1;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				DEVELOPMENT_TEAM = "";
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"$(inherited)",
+					"DEBUG=1",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 14.0;
+				MARKETING_VERSION = 0.1.0;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = macosx;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 6.0;
+			};
+			name = Debug;
+		};
+		85F707D9C8484D7E4AE3EF7D /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_IDENTITY = "-";
+				COMBINE_HIDPI_IMAGES = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+					"@loader_path/../Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.celecolabs.AWSBarTests;
+				SDKROOT = macosx;
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/AWSBar.app/Contents/MacOS/AWSBar";
+			};
+			name = Debug;
+		};
+		B6840A04912ACA53F93375B3 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_IDENTITY = "-";
+				COMBINE_HIDPI_IMAGES = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+					"@loader_path/../Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.celecolabs.AWSBarTests;
+				SDKROOT = macosx;
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/AWSBar.app/Contents/MacOS/AWSBar";
+			};
+			name = Release;
+		};
+		FC9875D89C5DCDCE3976A743 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = AWSBar/AWSBar.entitlements;
+				CODE_SIGN_IDENTITY = "Developer ID Application";
+				CODE_SIGN_STYLE = Manual;
+				COMBINE_HIDPI_IMAGES = YES;
+				ENABLE_HARDENED_RUNTIME = YES;
+				GENERATE_INFOPLIST_FILE = NO;
+				INFOPLIST_FILE = AWSBar/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+				);
+				OTHER_CODE_SIGN_FLAGS = "--timestamp";
+				PRODUCT_BUNDLE_IDENTIFIER = com.celecolabs.AWSBar;
+				SDKROOT = macosx;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		8D9F8F9A736C2F673C5A0483 /* Build configuration list for PBXProject "AWSBar" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				7713B7B1A6CE6436680FAE5D /* Debug */,
+				4B5C1B456337FFFCF3912111 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Debug;
+		};
+		93B1FE1F437E1A290151137D /* Build configuration list for PBXNativeTarget "AWSBar" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				271DB92255F610852F73DD85 /* Debug */,
+				FC9875D89C5DCDCE3976A743 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Debug;
+		};
+		D56160B797DE89CA3FD2EAC6 /* Build configuration list for PBXNativeTarget "AWSBarTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				85F707D9C8484D7E4AE3EF7D /* Debug */,
+				B6840A04912ACA53F93375B3 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Debug;
+		};
+/* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		A012B042E9B1E84300BF76BA /* XCRemoteSwiftPackageReference "SwiftTerm" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/migueldeicaza/SwiftTerm";
+			requirement = {
+				kind = exactVersion;
+				version = 1.11.0;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		4C5FFA93D1427740D9D8B934 /* SwiftTerm */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = A012B042E9B1E84300BF76BA /* XCRemoteSwiftPackageReference "SwiftTerm" */;
+			productName = SwiftTerm;
+		};
+/* End XCSwiftPackageProductDependency section */
+	};
+	rootObject = 0BDC5FB97DAFCF41CB09FBCA /* Project object */;
+}
