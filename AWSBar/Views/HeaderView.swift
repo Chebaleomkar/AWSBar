@@ -106,16 +106,25 @@ private extension HeaderView {
     var spend: some View {
         if let costs = state.costs {
             let money = { (amount: Decimal) in amount.formatted(.currency(code: costs.currency)) }
-            HStack(spacing: 6) {
-                Text(money(costs.thisMonth)).monospacedDigit()
-                Text("this month").foregroundStyle(.secondary)
-                if costs.total != costs.thisMonth {
-                    Text(money(costs.total)).monospacedDigit()
-                    Text("since \(costs.since.formatted(Date.FormatStyle(timeZone: .gmt).month(.abbreviated).year()))")
-                        .foregroundStyle(.secondary)
+            Button { state.toggleCostHistory() } label: {
+                HStack(spacing: 6) {
+                    Text(money(costs.thisMonth)).monospacedDigit()
+                    Text("this month").foregroundStyle(.secondary)
+                    if costs.total != costs.thisMonth {
+                        Text(money(costs.total)).monospacedDigit()
+                        Text("since \(costs.since.formatted(Date.FormatStyle(timeZone: .gmt).month(.abbreviated).year()))")
+                            .foregroundStyle(.secondary)
+                    }
+                    Image(systemName: "chart.bar.xaxis")
+                        .font(.caption)
+                        .foregroundStyle(state.costHistoryOpen ? .primary : .secondary)
                 }
+                .contentShape(Rectangle())
             }
-            .help("Charges before credits and refunds, from Cost Explorer, which updates a few times a day. "
+            .buttonStyle(.plain)
+            .accessibilityLabel("Spend history")
+            .accessibilityHint("Shows how daily spend changed over the last 14 days")
+            .help("Click for the last 14 days. Charges before credits and refunds, from Cost Explorer, which updates a few times a day. "
                 + "Last month: \(money(costs.lastMonth)). Checked \(costs.fetched.formatted(date: .omitted, time: .shortened)).")
         } else if state.costsLoading {
             Text("Loading costs…").foregroundStyle(.secondary)

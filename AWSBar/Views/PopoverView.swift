@@ -21,13 +21,18 @@ struct PopoverView: View {
             }
             .pickerStyle(.segmented)
             .labelsHidden()
+            .onChange(of: tab) { state.costHistoryOpen = false }
             .padding(.horizontal, 14)
             .padding(.bottom, 8)
             Group {
-                switch tab {
-                case .resources: ResourcesView()
-                case .runner: CommandRunnerView()
-                case .history: HistoryView()
+                if state.costHistoryOpen {
+                    CostHistoryView()
+                } else {
+                    switch tab {
+                    case .resources: ResourcesView()
+                    case .runner: CommandRunnerView()
+                    case .history: HistoryView()
+                    }
                 }
             }
             .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .top)

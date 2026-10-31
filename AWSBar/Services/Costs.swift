@@ -123,3 +123,121 @@ extension AWSContext {
         return CostReport(pages, now: now)
     }
 }
+
+/// Daily spend for the last 14 complete days, plus today so far, from Cost Explorer. Amounts are before credits and refunds.
+struct CostHistory: Equatable, Sendable {
+    struct Day: Equatable, Sendable, Identifiable {
+        let date: Date
+        let total: Decimal
+        var id: Date { date }
+    }
+
+    struct Mover: Equatable, Sendable, Identifiable {
+        let name: String
+        let recent: Decimal
+        let previous: Decimal
+        var change: Decimal { recent - previous }
+        var id: String { name }
+    }
+
+    static let dayCount = 14
+
+    let currency: String
+    /// Complete UTC days, oldest first. Days with no charges are zero.
+    let days: [Day]
+    /// Today so far. Cost Explorer lags, so this is usually low.
+    let today: Day?
+    /// The last 7 complete days and the 7 before them.
+    let recentTotal: Decimal
+    let previousTotal: Decimal
+    /// Services whose 7-day spend changed most, largest change first.
+    let movers: [Mover]
+    let fetched: Date
+
+    var change: Decimal { recentTotal - previousTotal }
+
+    /// Nil when the earlier week had no charges, because a percentage of zero means nothing.
+    var changePercent: Double? {
+        previousTotal > 0 ? NSDecimalNumber(decimal: change / previousTotal * 100).doubleValue : nil
+    }
+}
+
+extension CostHistory {
+    private static let calendar: Calendar = {
+        var calendar = Calendar(identifier: .gregorian)
+        calendar.timeZone = TimeZone(identifier: "UTC")!
+        return calendar
+    }()
+
+    /// The 14 complete days before today, and today. End is exclusive, so it's tomorrow.
+    static func window(now: Date) -> (start: Date, end: Date, today: Date) {
+        let today = calendar.startOfDay(for: now)
+        return (calendar.date(byAdding: .day, value: -dayCount, to: today)!,
+                calendar.date(byAdding: .day, value: 1, to: today)!,
+                today)
+    }
+
+    init(_ pages: [CostResponse], now: Date) {
+        let window = Self.window(now: now)
+        var totals: [Date: Decimal] = [:]
+        var services: [Date: [String: Decimal]] = [:]
+        var currency: String?
+        for result in pages.flatMap(\.resultsByTime) {
+            guard let date = try? Date(result.timePeriod.start, strategy: .iso8601.year().month().day()) else { continue }
+            for group in result.groups {
+                let amount = Decimal(string: group.metrics.unblendedCost.amount) ?? 0
+                currency = currency ?? group.metrics.unblendedCost.unit
+                totals[date, default: 0] += amount
+                // Tax is charged with the bill but isn't a service.
+                let name = group.keys.first ?? "Other"
+                if name != "Tax" { services[date, default: [:]][name, default: 0] += amount }
+            }
+        }
+        let days = (1...Self.dayCount).reversed().map { back -> Day in
+            let date = Self.calendar.date(byAdding: .day, value: -back, to: window.today)!
+            return Day(date: date, total: totals[date] ?? 0)
+        }
+        let previousDays = days.prefix(7), recentDays = days.suffix(7)
+        func perService(_ slice: some Sequence<Day>) -> [String: Decimal] {
+            slice.reduce(into: [:]) { sum, day in
+                for (name, amount) in services[day.date] ?? [:] { sum[name, default: 0] += amount }
+            }
+        }
+        let recent = perService(recentDays), previous = perService(previousDays)
+        let movers = Set(recent.keys).union(previous.keys)
+            .map { Mover(name: $0, recent: recent[$0] ?? 0, previous: previous[$0] ?? 0) }
+            .filter { abs(NSDecimalNumber(decimal: $0.change).doubleValue) >= 0.005 }
+            .sorted { (abs(NSDecimalNumber(decimal: $0.change).doubleValue), $1.name) > (abs(NSDecimalNumber(decimal: $1.change).doubleValue), $0.name) }
+        self.init(currency: currency ?? "USD",
+                  days: days,
+                  today: totals[window.today].map { Day(date: window.today, total: $0) },
+                  recentTotal: recentDays.reduce(0) { $0 + $1.total },
+                  previousTotal: previousDays.reduce(0) { $0 + $1.total },
+                  movers: Array(movers.prefix(5)),
+                  fetched: now)
+    }
+}
+
+extension AWSContext {
+    /// One Cost Explorer request, billed at $0.01, so callers reuse the result.
+    func costHistory(now: Date = Date()) async throws -> CostHistory {
+        let window = CostHistory.window(now: now)
+        // Cost Explorer only has an endpoint in us-east-1.
+        let ce = AWSContext(runner: runner, profile: profile, region: "us-east-1")
+        var pages: [CostResponse] = []
+        var token: String?
+        repeat {
+            var args = ["ce", "get-cost-and-usage",
+                        "--time-period", "Start=\(CostReport.day(window.start)),End=\(CostReport.day(window.end))",
+                        "--granularity", "DAILY",
+                        "--metrics", "UnblendedCost",
+                        "--group-by", "Type=DIMENSION,Key=SERVICE",
+                        "--filter", #"{"Not":{"Dimensions":{"Key":"RECORD_TYPE","Values":["Credit","Refund"]}}}"#]
+            if let token { args += ["--next-page-token", token] }
+            let page = try await ce.runner.decode(CostResponse.self, ce.args(args))
+            pages.append(page)
+            token = page.nextPageToken
+        } while token != nil
+        return CostHistory(pages, now: now)
+    }
+}
